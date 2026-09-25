@@ -1,0 +1,1976 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#networkCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 0;
+
+    opacity: 0.75;
+
+    filter: hue-rotate(45deg) saturate(1.3);
+}
+
+body {
+
+    min-height: 100vh;
+
+    background: #030507;
+
+    color: white;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    position: relative;
+    z-index: 2;
+
+    height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 45px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.06);
+
+    background:
+        rgba(3,5,7,0.65);
+
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+
+    text-decoration: none;
+
+    color: white;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.logo-dot {
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #2ea8ff;
+
+    margin-right: 10px;
+
+    box-shadow:
+        0 0 10px #2ea8ff;
+
+}
+
+
+.back-button {
+
+    text-decoration: none;
+
+    color: #8d949c;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+
+}
+
+
+.back-button:hover {
+
+    color: white;
+
+}
+
+
+/* MAIN */
+
+.scan-container {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 850px;
+
+    margin: auto;
+
+    padding: 90px 20px;
+
+    text-align: center;
+}
+/* BADGE */
+
+.scan-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 8px 15px;
+
+    border-radius: 30px;
+
+    border:
+        1px solid rgba(46,168,255,0.35);
+
+    color: #8997a5;
+
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.scan-badge span {
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #2ea8ff;
+
+    box-shadow:
+        0 0 10px #2ea8ff;
+
+}
+
+
+/* HEADING */
+
+h1 {
+
+    font-size: clamp(45px, 7vw, 75px);
+
+    letter-spacing: -3px;
+
+    margin-bottom: 20px;
+
+}
+
+
+h1 span {
+
+    background:
+        linear-gradient(
+            100deg,
+            #ffffff,
+            #5fc7ff,
+            #167bff
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+
+}
+
+
+.description {
+
+    max-width: 570px;
+
+    margin: auto;
+
+    color: #707983;
+
+    line-height: 1.7;
+
+    font-size: 15px;
+
+}
+
+
+/* CARD */
+
+.scan-card {
+
+    margin: 50px auto 0;
+
+    max-width: 650px;
+
+    padding: 35px;
+
+    text-align: left;
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius: 12px;
+
+    background:
+        rgba(10,14,18,0.75);
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,0.3);
+
+}
+
+
+/* INPUT */
+
+.input-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.input-group label {
+
+    color: #9ba5ae;
+
+    font-size: 12px;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+.input-group input {
+
+    width: 100%;
+
+    padding: 14px 15px;
+
+    border-radius: 6px;
+
+    border:
+        1px solid rgba(255,255,255,0.1);
+
+    background: #070a0d;
+
+    color: white;
+
+    outline: none;
+
+    font-size: 14px;
+
+}
+
+
+.input-group input:focus {
+
+    border-color:
+        rgba(46,168,255,0.6);
+
+    box-shadow:
+        0 0 15px rgba(46,168,255,0.08);
+
+}
+
+
+.input-group input::placeholder {
+
+    color: #4f5962;
+
+}
+
+
+/* PORTS */
+
+.port-row {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+
+}
+
+
+/* BUTTON */
+
+.start-button {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: white;
+
+    color: #050607;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    margin-top: 5px;
+
+    transition: 0.3s;
+
+}
+
+
+.start-button span {
+
+    margin-left: 10px;
+
+}
+
+
+.start-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 30px rgba(255,255,255,0.12);
+
+}
+
+
+/* WARNING */
+
+.authorization {
+
+    text-align: center;
+
+    color: #59636c;
+
+    font-size: 11px;
+
+    margin-top: 20px;
+
+}
+
+
+/* STATUS */
+
+.scan-status {
+
+    margin: 40px auto;
+
+    padding: 30px;
+
+    max-width: 650px;
+
+    border:
+        1px solid rgba(46,168,255,0.2);
+
+    border-radius: 10px;
+
+    background:
+        rgba(46,168,255,0.03);
+
+}
+
+
+.scan-status h2 {
+
+    margin: 15px 0 8px;
+
+}
+
+
+.scan-status p {
+
+    color: #69737c;
+
+    font-size: 13px;
+
+}
+
+
+.hidden {
+
+    display: none;
+
+}
+
+
+/* LOADING */
+
+.loading-circle {
+
+    width: 35px;
+
+    height: 35px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    border:
+        2px solid rgba(255,255,255,0.1);
+
+    border-top-color: #2ea8ff;
+
+    animation:
+        spin 1s linear infinite;
+
+}
+
+
+@keyframes spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .navbar {
+
+        padding: 0 20px;
+
+    }
+
+    .scan-container {
+
+        padding-top: 60px;
+
+    }
+
+    .scan-card {
+
+        padding: 25px 20px;
+
+    }
+
+    .port-row {
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+
+    }
+
+}
+/* =========================================
+   ADVANCED SCAN ANIMATION
+========================================= */
+
+.scan-status {
+    position: relative;
+    overflow: hidden;
+    margin: 40px auto;
+    padding: 30px;
+    max-width: 650px;
+
+    border: 1px solid rgba(46,168,255,0.25);
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(8,18,30,0.95),
+            rgba(5,9,15,0.95)
+        );
+
+    box-shadow:
+        0 0 40px rgba(46,168,255,0.08),
+        inset 0 0 40px rgba(46,168,255,0.02);
+
+    text-align: left;
+}
+
+
+/* TOP */
+
+.scan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+
+.scan-indicator {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #46b8ff;
+
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+
+.scan-indicator span {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #32b8ff;
+
+    box-shadow:
+        0 0 12px #32b8ff;
+
+    animation:
+        scanPulse 1s infinite;
+}
+
+
+#scan-percentage {
+    font-size: 28px;
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            90deg,
+            #48c6ff,
+            #6675ff
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+/* TARGET */
+
+.scan-target {
+    color: #687783;
+
+    font-size: 12px;
+
+    margin-bottom: 18px;
+}
+
+
+.scan-target strong {
+    color: #b8dfff;
+
+    margin-left: 5px;
+}
+
+
+/* PROGRESS */
+
+.progress-container {
+    width: 100%;
+    height: 7px;
+
+    background: rgba(255,255,255,0.06);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    margin-bottom: 25px;
+}
+
+
+.progress-bar {
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #1ba7ff,
+            #536dff,
+            #8b5cff
+        );
+
+    box-shadow:
+        0 0 15px rgba(55,160,255,0.6);
+
+    transition:
+        width 0.15s linear;
+}
+
+
+/* STATS */
+
+.scan-stats {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+
+.scan-stat {
+    padding: 15px;
+
+    border:
+        1px solid rgba(255,255,255,0.06);
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,0.02);
+}
+
+
+.scan-stat span {
+    display: block;
+
+    color: #596872;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 7px;
+}
+
+
+.scan-stat strong {
+    color: #d7e9f5;
+
+    font-size: 16px;
+}
+
+
+/* STAGE */
+
+.scan-stage {
+    border-left:
+        1px solid rgba(46,168,255,0.35);
+
+    padding-left: 15px;
+
+    margin-bottom: 20px;
+}
+
+
+.stage {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #43b9ff;
+
+    font-size: 12px;
+}
+
+
+.stage-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #35b9ff;
+
+    box-shadow:
+        0 0 10px #35b9ff;
+
+    animation:
+        scanPulse 1s infinite;
+}
+
+
+/* RADAR */
+
+.radar {
+    position: absolute;
+
+    right: 30px;
+    bottom: 35px;
+
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    opacity: 0.7;
+}
+
+
+.radar-ring {
+    position: absolute;
+
+    border:
+        1px solid rgba(55,170,255,0.25);
+
+    border-radius: 50%;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+
+.ring-one {
+    width: 35px;
+    height: 35px;
+}
+
+
+.ring-two {
+    width: 65px;
+    height: 65px;
+}
+
+
+.ring-three {
+    width: 95px;
+    height: 95px;
+}
+
+
+.radar-line {
+    position: absolute;
+
+    width: 48px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #35b9ff,
+            transparent
+        );
+
+    top: 50%;
+    left: 50%;
+
+    transform-origin: left center;
+
+    animation:
+        radarSpin 2s linear infinite;
+}
+
+
+.radar-center {
+    position: absolute;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #40c4ff;
+
+    box-shadow:
+        0 0 15px #40c4ff;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+
+/* MESSAGE */
+
+.scan-message {
+    color: #4e5d67;
+
+    font-size: 11px;
+
+    margin-top: 15px;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes scanPulse {
+
+    0% {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+
+    100% {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+
+}
+
+
+@keyframes radarSpin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .scan-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .radar {
+        display: none;
+    }
+
+}
+/* =========================================
+   NEW LIVE SCAN DASHBOARD
+========================================= */
+
+.scan-status {
+    position: relative;
+    overflow: hidden;
+
+    margin: 40px auto;
+
+    max-width: 760px;
+
+    padding: 32px;
+
+    border:
+        1px solid rgba(46,168,255,0.28);
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7,17,29,0.96),
+            rgba(3,8,15,0.97)
+        );
+
+    box-shadow:
+        0 0 50px rgba(20,130,255,0.08),
+        inset 0 0 40px rgba(30,130,255,0.025);
+
+    text-align: left;
+}
+
+
+/* HEADER */
+
+.scan-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+}
+
+
+.scan-indicator {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #42baff;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    font-weight: 600;
+}
+
+
+.scan-indicator span {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #32baff;
+
+    box-shadow:
+        0 0 14px #32baff;
+
+    animation: scanPulse 1.2s infinite;
+}
+
+
+.scan-indicator b {
+    color: #596dff;
+
+    letter-spacing: 4px;
+
+    font-size: 13px;
+}
+
+
+#scan-percentage {
+    font-size: 34px;
+
+    font-weight: 800;
+
+    background:
+        linear-gradient(
+            90deg,
+            #36c5ff,
+            #6b63ff
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+/* TARGET */
+
+.scan-target {
+    color: #667985;
+
+    font-size: 12px;
+
+    margin-bottom: 18px;
+}
+
+
+.scan-target strong {
+    color: #c1e7ff;
+
+    margin-left: 6px;
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+.scan-stats {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 16px;
+
+    margin-top: 22px;
+
+    margin-bottom: 20px;
+}
+
+
+.scan-stat {
+    position: relative;
+
+    min-height: 125px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    overflow: hidden;
+
+    border-radius: 11px;
+
+    background:
+        rgba(8,20,32,0.85);
+
+    border:
+        1px solid rgba(70,150,220,0.14);
+
+    transition: 0.3s;
+}
+
+
+.scan-stat:hover {
+
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(55,180,255,0.35);
+
+    box-shadow:
+        0 10px 30px rgba(20,130,255,0.08);
+}
+
+
+/* ICON */
+
+.stat-icon {
+
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 23px;
+
+    color: #38bdff;
+
+    background:
+        rgba(35,170,255,0.08);
+
+    border:
+        1px solid rgba(35,170,255,0.2);
+
+    box-shadow:
+        0 0 20px rgba(35,170,255,0.08);
+}
+
+
+.open-card .stat-icon {
+
+    color: #28e0bd;
+
+    background:
+        rgba(20,220,180,0.07);
+
+    border-color:
+        rgba(20,220,180,0.2);
+}
+
+
+/* CONTENT */
+
+.stat-content {
+    min-width: 0;
+}
+
+
+.stat-content > span {
+
+    display: block;
+
+    color: #667983;
+
+    font-size: 12px;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 5px;
+}
+
+.stat-content strong {
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 6px;
+
+    font-size: 34px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
+    color: #e8f4ff;
+}
+
+.stat-content strong small {
+
+    font-size: 20px;
+
+    font-weight: 500;
+
+    color: #7e8d99;
+
+    letter-spacing: 0;
+}
+
+.stat-content em {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color: #38baff;
+
+    font-size: 10px;
+
+    font-style: normal;
+}
+
+
+.open-card .stat-content em {
+    color: #24d8b5;
+}
+
+
+/* MINI GRAPH */
+
+.mini-bars {
+
+    position: absolute;
+
+    right: 18px;
+    bottom: 18px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 3px;
+
+    height: 35px;
+
+    opacity: 0.8;
+}
+
+
+.mini-bars i {
+
+    display: block;
+
+    width: 5px;
+
+    border-radius: 2px;
+
+    background:
+        linear-gradient(
+            to top,
+            #168cff,
+            #52caff
+        );
+
+    animation:
+        barPulse 1.2s infinite alternate;
+}
+
+
+.mini-bars i:nth-child(1) {
+    height: 10px;
+}
+
+.mini-bars i:nth-child(2) {
+    height: 18px;
+    animation-delay: .1s;
+}
+
+.mini-bars i:nth-child(3) {
+    height: 28px;
+    animation-delay: .2s;
+}
+
+.mini-bars i:nth-child(4) {
+    height: 21px;
+    animation-delay: .3s;
+}
+
+.mini-bars i:nth-child(5) {
+    height: 33px;
+    animation-delay: .4s;
+}
+
+
+.mini-bars.green i {
+
+    background:
+        linear-gradient(
+            to top,
+            #00bfa5,
+            #3be9c9
+        );
+}
+
+/* =========================
+   RADAR PANEL
+========================= */
+.radar-panel {
+    position: relative;
+
+    min-height: 225px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+/* RADAR */
+
+.radar {
+    position: relative;
+
+    width: 180px;
+    height: 180px;
+
+    flex-shrink: 0;
+}
+
+
+/* CIRCLES */
+
+.radar-circle {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border: 1px solid rgba(46,168,255,0.20);
+
+    border-radius: 50%;
+}
+
+.circle-1 {
+    width: 55px;
+    height: 55px;
+}
+
+.circle-2 {
+    width: 105px;
+    height: 105px;
+}
+
+.circle-3 {
+    width: 155px;
+    height: 155px;
+}
+
+
+/* CROSS */
+
+.radar-cross {
+    position: absolute;
+
+    background: rgba(46,168,255,0.12);
+}
+
+.radar-cross.horizontal {
+    width: 100%;
+    height: 1px;
+
+    left: 0;
+    top: 50%;
+}
+
+.radar-cross.vertical {
+    width: 1px;
+    height: 100%;
+
+    left: 50%;
+    top: 0;
+}
+
+
+/* =========================
+   ROTATING RADAR LINE
+========================= */
+
+.radar-sweep {
+
+    position: absolute;
+
+    width: 2px;
+    height: 50%;
+
+    left: 50%;
+    bottom: 50%;
+
+    transform-origin: bottom center;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(46,168,255,0.95),
+            rgba(46,168,255,0.15),
+            transparent
+        );
+
+    box-shadow:
+        0 0 8px rgba(46,168,255,0.8),
+        0 0 18px rgba(46,168,255,0.35);
+
+    animation:
+        radarSweep 2.2s linear infinite;
+
+    z-index: 5;
+}
+
+
+/* CENTER DOT */
+
+.radar-center {
+
+    position: absolute;
+
+    width: 9px;
+    height: 9px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: #2ea8ff;
+
+    box-shadow:
+        0 0 8px #2ea8ff,
+        0 0 18px rgba(46,168,255,0.7);
+
+    z-index: 10;
+}
+
+
+/* RADAR DOTS */
+
+.radar-dot {
+
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #2ea8ff;
+
+    box-shadow:
+        0 0 8px #2ea8ff;
+
+    z-index: 8;
+}
+
+.dot-1 {
+    top: 25%;
+    left: 32%;
+}
+
+.dot-2 {
+    top: 62%;
+    left: 25%;
+}
+
+.dot-3 {
+    top: 38%;
+    right: 22%;
+}
+
+
+/* ROTATION */
+
+@keyframes radarSweep {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+/* =========================================
+   LIVE ACTIVITY
+========================================= */
+
+.activity-panel {
+
+    min-height: 210px;
+
+    padding: 18px;
+
+    border:
+        1px solid rgba(50,150,220,0.12);
+
+    border-radius: 10px;
+
+    background:
+        rgba(3,10,17,0.8);
+}
+
+
+.activity-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #45c0ff;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    font-weight: 600;
+
+    padding-bottom: 12px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.05);
+}
+
+
+.activity-pulse {
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #39c5ff;
+
+    box-shadow:
+        0 0 10px #39c5ff;
+
+    animation:
+        scanPulse 1s infinite;
+}
+
+
+.activity-log {
+
+    margin-top: 12px;
+
+    height: 155px;
+
+    overflow: hidden;
+
+    font-family:
+        Consolas,
+        monospace;
+
+    font-size: 11px;
+
+    line-height: 2;
+
+    color: #66808f;
+}
+
+
+.activity-log div {
+
+    white-space: nowrap;
+
+    animation:
+        logFade 0.3s ease;
+}
+
+
+.activity-log span {
+
+    color: #319fd8;
+
+    margin-right: 5px;
+}
+
+
+.activity-log .open {
+
+    color: #28d9b2;
+}
+
+
+/* =========================================
+   CURRENT STAGE
+========================================= */
+
+.current-stage {
+
+    margin-top: 20px;
+
+    padding-left: 15px;
+
+    border-left:
+        1px solid rgba(50,180,255,0.4);
+}
+
+
+.stage-line {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #43baff;
+
+    font-size: 12px;
+}
+
+
+.stage-dot {
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #36baff;
+
+    box-shadow:
+        0 0 12px #36baff;
+
+    animation:
+        scanPulse 1s infinite;
+}
+
+
+.scan-message {
+
+    margin-top: 8px;
+
+    color: #53636e;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes radarSweep {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+@keyframes radarDot {
+
+    from {
+        opacity: .3;
+        transform: scale(.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+
+}
+
+
+@keyframes barPulse {
+
+    from {
+        opacity: .4;
+        transform: scaleY(.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+
+}
+
+
+@keyframes logFade {
+
+    from {
+        opacity: 0;
+        transform: translateX(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+
+@keyframes scanPulse {
+
+    0%, 100% {
+        opacity: .4;
+        transform: scale(.85);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .scan-stats,
+/* LOWER SCAN AREA */
+
+.scan-lower {
+    display: grid;
+
+    grid-template-columns: 255px 1fr;
+
+    gap: 16px;
+
+    width: 100%;
+
+    align-items: stretch;
+
+    margin-top: 20px;
+}
+
+.radar-panel {
+    position: relative;
+
+    min-height: 225px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+}
+}
+/* =====================================================
+   FINAL SCAN LAYOUT FIX
+   Paste this at the VERY BOTTOM of scan.css
+===================================================== */
+
+
+/* =========================
+   RADAR + LIVE ACTIVITY
+========================= */
+
+.scan-lower {
+
+    display: grid !important;
+
+    grid-template-columns: 255px minmax(0, 1fr) !important;
+
+    gap: 16px !important;
+
+    width: 100% !important;
+
+    align-items: stretch !important;
+
+    margin-top: 20px !important;
+
+}
+
+
+/* =========================
+   RADAR BOX
+========================= */
+
+.radar-panel {
+
+    position: relative !important;
+
+    min-height: 225px !important;
+
+    width: 100% !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    overflow: hidden !important;
+
+}
+
+
+/* KEEP RADAR CENTERED */
+
+.radar {
+
+    position: relative !important;
+
+    width: 180px !important;
+
+    height: 180px !important;
+
+    margin: 0 auto !important;
+
+    flex-shrink: 0 !important;
+
+}
+
+
+/* =========================
+   LIVE ACTIVITY BOX
+========================= */
+
+.activity-panel {
+
+    width: 100% !important;
+
+    min-width: 0 !important;
+
+    min-height: 225px !important;
+
+}
+
+
+/* =====================================================
+   PORTS SCANNED
+===================================================== */
+
+.ports-card .stat-content > span {
+
+    font-size: 13px !important;
+
+    font-weight: 600 !important;
+
+    letter-spacing: 1.4px !important;
+
+}
+
+
+/* MAIN NUMBER */
+
+.ports-card .stat-content strong {
+
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    align-items: baseline !important;
+
+    gap: 7px !important;
+
+    font-size: 34px !important;
+
+    line-height: 1 !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: -1px !important;
+
+}
+
+
+/* / 1000 */
+
+.ports-card .stat-content strong small {
+
+    display: inline !important;
+
+    font-size: 20px !important;
+
+    line-height: 1 !important;
+
+    font-weight: 500 !important;
+
+    color: #7e8d99 !important;
+
+}
+
+
+/* MAKE SURE THE TWO NUMBERS STAY TOGETHER */
+
+.ports-card .stat-content strong small span {
+
+    font-size: 20px !important;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .scan-lower {
+
+        grid-template-columns: 1fr !important;
+
+    }
+
+    .radar-panel {
+
+        min-height: 225px !important;
+
+    }
+
+}
+/* =========================
+   RADAR FINAL POSITION
+========================= */
+
+.radar {
+    transform: translate(25px, 30px) !important;
+}
+/* =========================
+   PORTS SCANNED NUMBERS
+========================= */
+
+.ports-card .stat-content strong {
+    display: flex !important;
+    align-items: baseline !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+
+    font-size: 28px !important;
+    line-height: 1 !important;
+    font-weight: 600 !important;
+
+    gap: 6px !important;
+}
+
+
+/* 123 */
+
+.ports-card .stat-content strong #ports-scanned {
+    font-size: 28px !important;
+    font-weight: 600 !important;
+}
+
+
+/* / 1000 */
+
+.ports-card .stat-content strong small {
+    display: inline-flex !important;
+    align-items: baseline !important;
+
+    font-size: 28px !important;
+    font-weight: 600 !important;
+
+    color: #7e8d99 !important;
+
+    gap: 6px !important;
+}
+
+
+/* 1000 specifically */
+
+.ports-card .stat-content strong small #total-ports {
+    font-size: 28px !important;
+    font-weight: 600 !important;
+    color: #7e8d99 !important;
+}
+/* -----------------------------------------
+   PORT SCAN ANALYSIS STATUS
+----------------------------------------- */
+
+.analysis-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 7px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    color: #8fa3b8;
+}
+
+.analysis-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #00ff9d;
+    box-shadow: 0 0 8px rgba(0, 255, 157, 0.8);
+    animation: analysisPulse 1.2s infinite;
+}
+
+@keyframes analysisPulse {
+
+    0% {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+
+}

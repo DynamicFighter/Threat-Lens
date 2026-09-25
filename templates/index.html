@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SecureScan | Network Security Assessment</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+    <canvas id="networkCanvas"></canvas>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <span class="logo-dot"></span>
+            SecureScan
+        </div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#how">How It Works</a>
+            <a href="#about">About</a>
+        </div>
+
+        <a href="#" class="nav-button">
+            Start Scan
+        </a>
+
+    </nav>
+
+
+    <!-- HERO -->
+    <main id="home" class="hero">
+
+        <div class="badge">
+            <span></span>
+            TY PROJECT · COMPUTER SCIENCE · 2026
+        </div>
+
+        <h1>
+            Secure<span>Scan</span>
+        </h1>
+
+        <h2>
+            Intelligent Network Security Assessment
+        </h2>
+
+        <p class="hero-description">
+            Scan your authorized IP address or domain, detect open ports,
+            identify services and vulnerabilities, and understand your
+            overall security risk in one place.
+        </p>
+
+
+        <!-- BUTTONS -->
+        <div class="hero-buttons">
+
+            <a href="/scan" class="primary-button">
+                Start Security Scan
+                <span>→</span>
+            </a>
+
+           <a href="#how-it-works" class="secondary-button">
+                How It Works
+                <span>↓</span>
+            </a>
+
+        </div>
+
+
+        <!-- NETWORK VISUALIZATION -->
+        <div class="network-visual">
+
+            <div class="central-node">
+                <div class="pulse"></div>
+                <span>SECURE</span>
+            </div>
+
+            <div class="node node-1"></div>
+            <div class="node node-2"></div>
+            <div class="node node-3"></div>
+            <div class="node node-4"></div>
+            <div class="node node-5"></div>
+            <div class="node node-6"></div>
+
+            <div class="connection connection-1"></div>
+            <div class="connection connection-2"></div>
+            <div class="connection connection-3"></div>
+            <div class="connection connection-4"></div>
+            <div class="connection connection-5"></div>
+            <div class="connection connection-6"></div>
+
+        </div>
+
+
+        <div class="scroll-text">
+            ↓ &nbsp; Scroll to explore
+        </div>
+
+
+        <!-- STATS CARD -->
+        <div class="stats-card">
+
+            <div class="stat">
+                <strong>01</strong>
+                <span>Port Scanner</span>
+            </div>
+
+            <div class="stat">
+                <strong>02</strong>
+                <span>CVE Analysis</span>
+            </div>
+
+            <div class="stat">
+                <strong>03</strong>
+                <span>Risk Assessment</span>
+            </div>
+
+            <div class="stat">
+                <strong>04</strong>
+                <span>Security Report</span>
+            </div>
+
+        </div>
+
+    </main>
+    <!-- HOW IT WORKS -->
+
+<section id="how-it-works" class="how-section">
+
+    <div class="section-badge">
+        HOW IT WORKS
+    </div>
+
+    <h2>
+        From <span>Target</span> to Security Assessment
+    </h2>
+
+    <p class="section-description">
+        SecureScan analyzes an authorized IP address or domain
+        through multiple security assessment stages.
+    </p>
+
+
+    <div class="workflow">
+
+        <!-- STEP 1 -->
+        <div class="workflow-card">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <div class="step-icon">
+                ◎
+            </div>
+
+            <h3>
+                Target Input
+            </h3>
+
+            <p>
+                Enter an authorized IP address or domain
+                that you want to assess.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-arrow">
+            →
+        </div>
+
+
+        <!-- STEP 2 -->
+        <div class="workflow-card">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <div class="step-icon">
+                ◉
+            </div>
+
+            <h3>
+                Port Scanning
+            </h3>
+
+            <p>
+                SecureScan scans the selected port range
+                and identifies open ports.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-arrow">
+            →
+        </div>
+
+
+        <!-- STEP 3 -->
+        <div class="workflow-card">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <div class="step-icon">
+                ◈
+            </div>
+
+            <h3>
+                Service Detection
+            </h3>
+
+            <p>
+                Nmap identifies services, products and
+                available version information.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="workflow workflow-bottom">
+
+        <!-- STEP 4 -->
+        <div class="workflow-card">
+
+            <div class="step-number">
+                04
+            </div>
+
+            <div class="step-icon">
+                ◇
+            </div>
+
+            <h3>
+                CVE Analysis
+            </h3>
+
+            <p>
+                Detected software information is checked
+                against the NVD vulnerability database.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-arrow">
+            →
+        </div>
+
+
+        <!-- STEP 5 -->
+        <div class="workflow-card">
+
+            <div class="step-number">
+                05
+            </div>
+
+            <div class="step-icon">
+                ⚠
+            </div>
+
+            <h3>
+                Risk Assessment
+            </h3>
+
+            <p>
+                CVSS scores and vulnerabilities are analyzed
+                to determine the overall security risk.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-arrow">
+            →
+        </div>
+
+
+        <!-- STEP 6 -->
+        <div class="workflow-card">
+
+            <div class="step-number">
+                06
+            </div>
+
+            <div class="step-icon">
+                ✓
+            </div>
+
+            <h3>
+                Security Report
+            </h3>
+
+            <p>
+                The final results are presented clearly with
+                vulnerabilities, severity and recommendations.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>  
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

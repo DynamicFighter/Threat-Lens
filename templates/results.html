@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SecureScan | Security Assessment</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='results.css') }}">
+
+</head>
+
+<body>
+
+    <canvas id="networkCanvas"></canvas>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="/" class="logo">
+
+            <span class="logo-dot"></span>
+
+            SecureScan
+
+        </a>
+
+        <a href="/scan" class="back-button">
+            ← New Scan
+        </a>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="results-container">
+
+        <div class="results-badge">
+
+            <span></span>
+
+            SECURITY ASSESSMENT
+
+        </div>
+
+
+        <h1>
+            Security <span>Assessment Results</span>
+        </h1>
+
+
+        <p class="description">
+            Detailed security analysis of the scanned target.
+        </p>
+
+
+        <!-- RESULT CONTENT WILL BE ADDED NEXT -->
+
+<div id="results-content">
+
+    <!-- TARGET INFORMATION -->
+
+    <div class="target-info">
+
+        <span>SCANNED TARGET</span>
+
+        <strong id="result-target">
+            Loading...
+        </strong>
+
+    </div>
+
+
+    <!-- RISK OVERVIEW -->
+
+    <div class="risk-overview">
+
+        <div class="risk-header">
+
+            <div>
+
+                <span class="section-label">
+                    SECURITY RISK
+                </span>
+
+                <h2 id="overall-risk">
+                    -
+                </h2>
+
+            </div>
+
+            <div class="risk-indicator">
+                <span></span>
+                ASSESSMENT
+            </div>
+
+        </div>
+
+
+        <div class="risk-stats">
+
+            <div class="risk-stat">
+
+                <span>
+                    HIGHEST CVSS
+                </span>
+
+                <strong id="highest-cvss">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="risk-stat">
+
+                <span>
+                    VULNERABILITIES
+                </span>
+
+                <strong id="total-cves">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="risk-stat">
+
+                <span>
+                    OPEN PORTS
+                </span>
+
+                <strong id="total-open-ports">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- OPEN PORTS & SERVICES -->
+
+<div class="ports-section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                NETWORK SERVICES
+            </span>
+
+            <h2>
+                Open Ports & Services
+            </h2>
+
+        </div>
+
+        <span id="ports-count-label">
+            0 OPEN
+        </span>
+
+    </div>
+
+
+    <div class="ports-table-container">
+
+        <table class="ports-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        PORT
+                    </th>
+
+                    <th>
+                        SERVICE
+                    </th>
+
+                    <th>
+                        PRODUCT
+                    </th>
+
+                    <th>
+                        VERSION
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="ports-table-body">
+
+                <tr>
+
+                    <td colspan="4"
+                        class="table-loading">
+
+                        Loading port information...
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+<!-- VULNERABILITY FINDINGS -->
+
+<div class="vulnerability-section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                SECURITY FINDINGS
+            </span>
+
+            <h2>
+                Vulnerability Findings
+            </h2>
+
+        </div>
+
+        <span id="vulnerability-count-label">
+            0 FOUND
+        </span>
+
+    </div>
+
+
+    <div id="vulnerability-list">
+
+        <div class="vulnerability-loading">
+            Loading vulnerability information...
+        </div>
+
+    </div>
+
+</div>
+<!-- SECURITY RECOMMENDATIONS -->
+
+<div class="recommendations-section">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                REMEDIATION
+            </span>
+
+            <h2>
+                Security Recommendations
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div id="recommendations-list">
+
+        <div class="recommendation-loading">
+            Generating security recommendations...
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+    </main>
+
+
+    <script>
+
+        async function loadResults() {
+
+            try {
+
+                const response =
+                    await fetch("/api/latest-result");
+                const data =
+                     await response.json();
+
+                console.log(
+                    "RESULT DATA:",
+                    data
+                );
+
+
+if (!data.success) {
+
+    document.getElementById(
+        "results-content"
+    ).innerHTML =
+        "No scan results found.";
+
+    return;
+}
+
+
+// -----------------------------
+// TARGET
+// -----------------------------
+
+document.getElementById(
+    "result-target"
+).textContent =
+    data.scan.target;
+
+
+// -----------------------------
+// OVERALL RISK
+// -----------------------------
+
+document.getElementById(
+    "overall-risk"
+).textContent =
+    data.scan.overall_risk;
+
+
+// -----------------------------
+// HIGHEST CVSS
+// -----------------------------
+
+document.getElementById(
+    "highest-cvss"
+).textContent =
+    data.scan.highest_cvss;
+
+
+// -----------------------------
+// TOTAL CVEs
+// -----------------------------
+
+document.getElementById(
+    "total-cves"
+).textContent =
+    data.scan.total_cves;
+
+
+// -----------------------------
+// OPEN PORTS
+// -----------------------------
+
+document.getElementById(
+    "total-open-ports"
+).textContent =
+    data.scan.total_open_ports;
+// -----------------------------
+// OPEN PORTS TABLE
+// -----------------------------
+
+const portsTableBody =
+    document.getElementById(
+        "ports-table-body"
+    );
+
+const portsCountLabel =
+    document.getElementById(
+        "ports-count-label"
+    );
+
+
+if (portsCountLabel) {
+
+    portsCountLabel.textContent =
+        data.ports.length + " OPEN";
+}
+
+
+if (portsTableBody) {
+
+    portsTableBody.innerHTML = "";
+
+
+    if (data.ports.length === 0) {
+
+        portsTableBody.innerHTML = `
+            <tr>
+
+                <td colspan="4"
+                    class="table-empty">
+
+                    No open ports detected.
+
+                </td>
+
+            </tr>
+        `;
+
+    }
+
+    else {
+
+        data.ports.forEach(function(port) {
+
+            const row =
+                document.createElement("tr");
+
+            row.innerHTML = `
+
+                <td>
+
+                    <span class="port-number">
+                        ${port.port}
+                    </span>
+
+                </td>
+
+                <td>
+                    ${port.service || "Unknown"}
+                </td>
+
+                <td>
+                    ${port.product || "Unknown"}
+                </td>
+
+                <td>
+                    ${port.version || "Unknown"}
+                </td>
+
+            `;
+
+            portsTableBody.appendChild(row);
+
+        });
+
+    }
+
+}
+// -----------------------------
+// VULNERABILITY FINDINGS
+// -----------------------------
+
+const vulnerabilityList =
+    document.getElementById(
+        "vulnerability-list"
+    );
+
+const vulnerabilityCountLabel =
+    document.getElementById(
+        "vulnerability-count-label"
+    );
+
+
+if (vulnerabilityCountLabel) {
+
+    vulnerabilityCountLabel.textContent =
+        data.vulnerabilities.length + " FOUND";
+}
+
+
+if (vulnerabilityList) {
+
+    vulnerabilityList.innerHTML = "";
+
+
+    // No vulnerabilities
+    if (data.vulnerabilities.length === 0) {
+
+        vulnerabilityList.innerHTML = `
+
+            <div class="no-vulnerabilities">
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        No vulnerabilities identified
+                    </strong>
+
+                    <span>
+                        No CVE records were returned for
+                        the detected services.
+                    </span>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    // Vulnerabilities found
+    else {
+
+        data.vulnerabilities.forEach(
+            function(vulnerability) {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "vulnerability-card";
+
+
+                const severity =
+                    vulnerability.severity ||
+                    "UNKNOWN";
+
+
+                const severityClass =
+                    severity.toLowerCase();
+
+
+                card.innerHTML = `
+
+                    <div class="vulnerability-top">
+
+                        <div>
+
+                            <span class="cve-label">
+                                ${vulnerability.cve_id}
+                            </span>
+
+                            <span class="
+                                severity-badge
+                                ${severityClass}
+                            ">
+                                ${severity}
+                            </span>
+
+                        </div>
+
+
+                        <div class="cvss-score">
+
+                            <span>
+                                CVSS
+                            </span>
+
+                            <strong>
+                                ${vulnerability.cvss_score}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="vulnerability-details">
+
+                        <div class="affected-port">
+
+                            AFFECTED PORT
+
+                            <strong>
+                                ${vulnerability.port}
+                            </strong>
+
+                        </div>
+
+
+                        <p>
+                            ${vulnerability.description}
+                        </p>
+
+                    </div>
+
+                `;
+
+
+                vulnerabilityList.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+}
+// -----------------------------
+// SECURITY RECOMMENDATIONS
+// -----------------------------
+
+const recommendationsList =
+    document.getElementById(
+        "recommendations-list"
+    );
+
+
+if (recommendationsList) {
+
+    recommendationsList.innerHTML = "";
+
+
+    const recommendations = [];
+
+    const openPorts =
+        data.ports.length;
+
+    const vulnerabilities =
+        data.vulnerabilities.length;
+
+
+    // -----------------------------
+    // OPEN PORT RECOMMENDATION
+    // -----------------------------
+
+    if (openPorts > 0) {
+
+        recommendations.push({
+            title: "Review exposed ports",
+            text:
+                "Review the detected open ports and close any services that are not required."
+        });
+
+    }
+
+
+    // -----------------------------
+    // VULNERABILITY RECOMMENDATION
+    // -----------------------------
+
+    if (vulnerabilities > 0) {
+
+        recommendations.push({
+            title: "Address detected vulnerabilities",
+            text:
+                "Review the identified CVE records and apply the appropriate security updates or vendor fixes."
+        });
+
+    }
+
+
+    // -----------------------------
+    // HIGH / CRITICAL
+    // -----------------------------
+
+    const highRiskVulnerability =
+        data.vulnerabilities.some(
+            function(vulnerability) {
+
+                const severity =
+                    (
+                        vulnerability.severity ||
+                        ""
+                    ).toUpperCase();
+
+                return (
+                    severity === "HIGH" ||
+                    severity === "CRITICAL"
+                );
+
+            }
+        );
+
+
+    if (highRiskVulnerability) {
+
+        recommendations.push({
+            title: "Prioritize high-severity findings",
+            text:
+                "High or critical severity vulnerabilities were detected. Prioritize remediation and verify that affected services are updated."
+        });
+
+    }
+
+
+    // -----------------------------
+    // UNKNOWN VERSION
+    // -----------------------------
+
+    const unknownVersion =
+        data.ports.some(
+            function(port) {
+
+                return (
+                    !port.version ||
+                    port.version === "Unknown"
+                );
+
+            }
+        );
+
+
+    if (unknownVersion) {
+
+        recommendations.push({
+            title: "Verify service versions",
+            text:
+                "Some detected services do not report a known version. Verify the running software versions to improve vulnerability assessment accuracy."
+        });
+
+    }
+
+
+    // -----------------------------
+    // NO VULNERABILITIES
+    // -----------------------------
+
+    if (vulnerabilities === 0) {
+
+        recommendations.push({
+            title: "Continue regular security monitoring",
+            text:
+                "No CVE records were returned for the detected services. Continue monitoring exposed services and keep software updated."
+        });
+
+    }
+
+
+    // -----------------------------
+    // DISPLAY RECOMMENDATIONS
+    // -----------------------------
+
+    recommendations.forEach(
+        function(recommendation, index) {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "recommendation-card";
+
+
+            card.innerHTML = `
+
+                <div class="recommendation-number">
+                    ${index + 1}
+                </div>
+
+
+                <div class="recommendation-content">
+
+                    <strong>
+                        ${recommendation.title}
+                    </strong>
+
+                    <p>
+                        ${recommendation.text}
+                    </p>
+
+                </div>
+
+            `;
+
+
+            recommendationsList.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Could not load results:",
+                    error
+                );
+
+            }
+
+        }
+
+        loadResults();
+
+    </script>
+
+</body>
+
+</html>

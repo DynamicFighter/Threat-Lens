@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SecureScan | Start Scan</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='scan.css') }}">
+
+</head>
+
+
+<body>
+
+    <canvas id="networkCanvas"></canvas>
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="/" class="logo">
+
+            <span class="logo-dot"></span>
+
+            SecureScan
+
+        </a>
+
+
+        <a href="/" class="back-button">
+            ← Back
+        </a>
+
+    </nav>
+
+
+
+    <!-- MAIN -->
+
+    <main class="scan-container">
+
+
+        <div class="scan-badge">
+
+            <span></span>
+
+            SECURITY ASSESSMENT
+
+        </div>
+
+
+        <h1>
+            Start Your <span>Security Scan</span>
+        </h1>
+
+
+        <p class="description">
+
+            Enter an authorized IP address or domain
+            to analyze its network security.
+
+        </p>
+
+
+
+        <!-- SCAN CARD -->
+
+        <div class="scan-card">
+
+
+            <div class="input-group">
+
+                <label>
+                    Target IP / Domain
+                </label>
+
+                <input
+                    type="text"
+                    id="target"
+                    placeholder="e.g. 192.168.1.1 or example.com"
+                >
+
+            </div>
+
+
+
+            <div class="port-row">
+
+
+                <div class="input-group">
+
+                    <label>
+                        Start Port
+                    </label>
+
+                    <input
+                        type="number"
+                        id="start-port"
+                        value="1"
+                        min="1"
+                        max="65535"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        End Port
+                    </label>
+
+                    <input
+                        type="number"
+                        id="end-port"
+                        value="1000"
+                        min="1"
+                        max="65535"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+
+            <button
+                class="start-button"
+                onclick="startScan()"
+            >
+
+                Start Security Scan
+
+                <span>→</span>
+
+            </button>
+
+
+            <div class="authorization">
+
+                ⚠ Only scan systems you own
+                or have explicit authorization to test.
+
+            </div>
+
+
+        </div>
+
+
+
+<!-- SCAN STATUS -->
+
+<div id="scan-status" class="scan-status hidden">
+
+    <!-- HEADER -->
+
+    <div class="scan-header">
+
+        <div class="scan-indicator">
+            <span></span>
+            SCANNING
+            <b>///</b>
+        </div>
+
+        <div id="scan-percentage">
+            0%
+        </div>
+
+    </div>
+
+
+    <!-- TARGET -->
+
+    <div class="scan-target">
+
+        Target:
+
+        <strong id="scanning-target">
+            -
+        </strong>
+
+    </div>
+
+
+    <!-- PROGRESS BAR -->
+
+    <div class="progress-container">
+
+        <div
+            id="progress-bar"
+            class="progress-bar">
+        </div>
+
+    </div>
+
+
+    <!-- MAIN STATS -->
+<!-- MAIN STATS -->
+
+<div class="scan-stats">
+
+    <!-- PORTS SCANNED -->
+    <div class="scan-stat ports-card">
+
+        <div class="stat-icon">
+            ⬡
+        </div>
+
+        <div class="stat-content">
+
+            <span>
+                PORTS SCANNED
+            </span>
+
+            <strong>
+                <span id="ports-scanned">0</span>
+                <small>/<span id="total-ports">0</span></small>
+            </strong>
+
+            <em id="ports-percent">
+                0% complete
+            </em>
+
+            <div id="analysis-status" class="analysis-status">
+                <span class="analysis-dot"></span>
+                <span id="analysis-stage">
+                    Scanning Ports
+                </span>
+            </div>
+
+        </div>
+
+        <div class="mini-bars">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+        </div>
+
+    </div>
+
+
+    <!-- OPEN PORTS -->
+
+    <div class="scan-stat open-card">
+
+        <div class="stat-icon">
+            ◈
+        </div>
+
+        <div class="stat-content">
+
+            <span>
+                OPEN PORTS
+            </span>
+
+            <strong id="open-ports">
+                0
+            </strong>
+
+            <em>
+                Detected so far
+            </em>
+
+        </div>
+
+        <div class="mini-bars green">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- LOWER SCAN AREA -->
+
+<div class="scan-lower">
+
+    <!-- RADAR -->
+
+    <div class="radar-panel">
+
+        <div class="radar">
+
+            <div class="radar-circle circle-1"></div>
+            <div class="radar-circle circle-2"></div>
+            <div class="radar-circle circle-3"></div>
+
+            <div class="radar-cross horizontal"></div>
+            <div class="radar-cross vertical"></div>
+
+            <div class="radar-sweep"></div>
+
+            <div class="radar-center"></div>
+
+            <div class="radar-dot dot-1"></div>
+            <div class="radar-dot dot-2"></div>
+            <div class="radar-dot dot-3"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- LIVE SCAN ACTIVITY -->
+
+    <div class="activity-panel">
+
+        <div class="activity-title">
+
+            <span class="activity-pulse"></span>
+
+            LIVE SCAN ACTIVITY
+
+        </div>
+
+        <div id="activity-log" class="activity-log"></div>
+
+    </div>
+
+</div>
+
+
+<!-- CURRENT STAGE -->
+
+<div class="current-stage">
+
+    <div class="stage-line">
+
+        <div class="stage-dot active"></div>
+
+        <span id="current-stage">
+            Scanning ports...
+        </span>
+
+    </div>
+
+    <div class="scan-message">
+        Analyzing network security...
+    </div>
+
+</div>
+
+    </main>
+
+
+<script>
+
+async function startScan() {
+
+    const target =
+        document.getElementById("target").value.trim();
+
+    const startPort =
+        parseInt(
+            document.getElementById("start-port").value
+        );
+
+    const endPort =
+        parseInt(
+            document.getElementById("end-port").value
+        );
+
+
+    // -----------------------------
+    // VALIDATION
+    // -----------------------------
+
+    if (!target) {
+        alert("Please enter a target.");
+        return;
+    }
+
+    if (
+        isNaN(startPort) ||
+        isNaN(endPort) ||
+        startPort < 1 ||
+        endPort > 65535 ||
+        startPort > endPort
+    ) {
+        alert("Please enter a valid port range.");
+        return;
+    }
+
+
+    // -----------------------------
+    // SHOW SCAN UI
+    // -----------------------------
+
+    document
+        .getElementById("scan-status")
+        .classList.remove("hidden");
+
+
+    // -----------------------------
+    // SET INITIAL VALUES
+    // -----------------------------
+
+    document
+        .getElementById("scanning-target")
+        .textContent = target;
+
+    document
+        .getElementById("total-ports")
+        .textContent =
+            endPort - startPort + 1;
+
+    document
+        .getElementById("ports-scanned")
+        .textContent = "0";
+
+    document
+        .getElementById("open-ports")
+        .textContent = "0";
+
+    document
+        .getElementById("scan-percentage")
+        .textContent = "0%";
+
+    document
+        .getElementById("progress-bar")
+        .style.width = "0%";
+
+
+    // -----------------------------
+    // SCROLL TO SCAN BOX
+    // -----------------------------
+
+    document
+        .getElementById("scan-status")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+
+    // -----------------------------
+    // START REAL SCAN
+    // -----------------------------
+
+    try {
+
+        const response = await fetch(
+            "/api/start-scan",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    target: target,
+                    start_port: startPort,
+                    end_port: endPort
+                })
+            }
+        );
+
+
+        const result =
+            await response.json();
+
+
+        if (!result.success) {
+
+            alert(result.error);
+
+            return;
+        }
+
+
+        console.log(
+            "REAL SCAN STARTED"
+        );
+
+        startActivityAnimation(
+            startPort,
+            endPort
+        );
+
+        startProgressPolling();
+    }
+
+    catch (error) {
+
+        console.error(
+            "Scanner connection error:",
+            error
+        );
+
+        alert(
+            "Could not connect to scanner."
+        );
+    }
+}
+// -----------------------------------------
+// LIVE SCAN ACTIVITY ANIMATION
+// -----------------------------------------
+
+let activityAnimation = null;
+let activityPort = 1;
+
+function startActivityAnimation(startPort, endPort) {
+
+    const activityLog =
+        document.getElementById("activity-log");
+
+    if (!activityLog) return;
+
+    activityPort = startPort;
+
+    const messages = [];
+
+    if (activityAnimation) {
+        clearInterval(activityAnimation);
+    }
+
+    activityAnimation = setInterval(function () {
+
+        if (activityPort > endPort) {
+            activityPort = startPort;
+        }
+
+        const port = activityPort;
+
+        // Visual activity only.
+        // Actual open-port count comes from backend.
+
+        const entry =
+            document.createElement("div");
+
+        entry.className = "activity-line";
+
+        entry.innerHTML =
+            `
+            <span class="log-tag">[SCAN]</span>
+            Port ${port}/tcp ... CHECKING
+            `;
+
+        activityLog.appendChild(entry);
+
+        // Keep only the latest 7 messages
+        while (activityLog.children.length > 7) {
+            activityLog.removeChild(
+                activityLog.firstChild
+            );
+        }
+
+        activityPort++;
+
+    }, 250);
+}
+
+
+function stopActivityAnimation() {
+
+    if (activityAnimation) {
+
+        clearInterval(
+            activityAnimation
+        );
+
+        activityAnimation = null;
+    }
+}
+async function startProgressPolling() {
+
+    console.log("Starting progress monitoring...");
+
+    const progressInterval = setInterval(
+        async function () {
+
+            try {
+
+                const response = await fetch(
+                    "/api/scan-status"
+                );
+
+                const data = await response.json();
+
+                console.log(
+                    "SCAN STATUS:",
+                    data
+                );
+
+                // -----------------------------
+                // UPDATE PERCENTAGE
+                // -----------------------------
+
+                document.getElementById(
+                    "scan-percentage"
+                ).textContent =
+                    data.percentage + "%";
+
+
+                // -----------------------------
+                // UPDATE PROGRESS BAR
+                // -----------------------------
+
+                document.getElementById(
+                    "progress-bar"
+                ).style.width =
+                    data.percentage + "%";
+
+
+                // -----------------------------
+                // UPDATE TARGET
+                // -----------------------------
+
+                if (data.target) {
+
+                    document.getElementById(
+                        "scanning-target"
+                    ).textContent =
+                        data.target;
+                }
+
+
+                // -----------------------------
+                // UPDATE PORTS SCANNED
+                // -----------------------------
+
+                document.getElementById(
+                    "ports-scanned"
+                ).textContent =
+                    data.ports_scanned;
+
+
+                document.getElementById(
+                    "total-ports"
+                ).textContent =
+                    data.total_ports;
+
+
+                // -----------------------------
+                // UPDATE OPEN PORTS
+                // -----------------------------
+
+                document.getElementById(
+                    "open-ports"
+                ).textContent =
+                    data.open_ports;
+
+
+                // -----------------------------
+                // UPDATE PORT PERCENTAGE
+                // -----------------------------
+
+                let portPercent = 0;
+
+                if (data.total_ports > 0) {
+
+                    portPercent = Math.floor(
+                        (
+                            data.ports_scanned /
+                            data.total_ports
+                        ) * 100
+                    );
+                }
+
+                const portsPercentElement =
+                    document.getElementById(
+                        "ports-percent"
+                    );
+
+                if (portsPercentElement) {
+
+                    portsPercentElement.textContent =
+                        portPercent + "% complete";
+                }
+
+                // -----------------------------
+                // UPDATE CURRENT STAGE
+                // -----------------------------
+
+                const stageElement =
+                    document.getElementById(
+                        "current-stage"
+                    );
+
+                if (stageElement) {
+
+                    stageElement.textContent =
+                        data.stage;
+                }
+
+
+                // -----------------------------
+                // UPDATE ANALYSIS STATUS
+                // -----------------------------
+
+                const analysisStage =
+                    document.getElementById(
+                        "analysis-stage"
+                    );
+
+                if (analysisStage) {
+
+                    analysisStage.textContent =
+                        data.stage;
+                }
+
+                // -----------------------------
+                // UPDATE ACTIVITY LOG
+                // -----------------------------
+
+                const activityLog =
+                    document.getElementById(
+                        "activity-log"
+                    );
+
+                if (activityLog) {
+
+            
+                }
+
+
+                // -----------------------------
+                // SCAN COMPLETED
+                // -----------------------------
+
+            if (data.status === "completed") {
+
+                 clearInterval(
+                     progressInterval
+                 );
+
+                 stopActivityAnimation();
+
+                console.log(
+                    "SCAN COMPLETED",
+                      data
+                 );
+
+     // Wait briefly so the final 100% state is visible
+                 setTimeout(function () {
+
+                    window.location.href = "/results";
+
+                 }, 800);
+}
+                // -----------------------------
+                // SCAN ERROR
+                // -----------------------------
+
+                if (data.status === "error") {
+
+                    clearInterval(
+                        progressInterval
+                    );
+                    stopActivityAnimation();
+
+                    alert(
+                        data.message ||
+                        "Scanner encountered an error."
+                    );
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Progress error:",
+                    error
+                );
+
+            }
+
+        },
+
+        500
+    );
+}
+
+</script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
