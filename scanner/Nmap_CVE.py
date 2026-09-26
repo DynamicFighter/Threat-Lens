@@ -194,9 +194,7 @@ def run_scan(target_input, start_port, end_port):
             map(str, sorted(open_ports))
         )
 
-        nmap_path = (
-            r"C:\Program Files (x86)\Nmap\nmap.exe"
-        )
+        nmap_path = "nmap"
 
         try:
 
