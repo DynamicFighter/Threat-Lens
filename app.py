@@ -4,8 +4,12 @@ import sys
 import os
 import sqlite3
 
-# Add Port Scanner folder to Python path
-scanner_folder = r"D:\Abdullah\TY Project\Port Scanner"
+# Add scanner folder to Python path
+
+scanner_folder = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "scanner"
+)
 
 if scanner_folder not in sys.path:
     sys.path.insert(0, scanner_folder)
