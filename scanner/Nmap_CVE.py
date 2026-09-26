@@ -210,7 +210,8 @@ def run_scan(target_input, start_port, end_port):
                     "-"
                 ],
                 capture_output=True,
-                text=True
+                text=True,
+                timeout=300
             )
 
             if result.returncode != 0:
@@ -298,9 +299,10 @@ def run_scan(target_input, start_port, end_port):
                             item["version"]
                         )
                     )
-
+        except subprocess.TimeoutExpired:
+            print("Nmap scan timed out.")
+            version_results = []
         except FileNotFoundError:
-
             print(
                 "Nmap executable was not found."
             )
@@ -428,7 +430,10 @@ def run_scan(target_input, start_port, end_port):
     )
 
     # Save ports
+    
+    saved_ports = set()
 
+    # Save ports detected by Nmap
     for item in version_results:
 
         save_port(
@@ -438,6 +443,26 @@ def run_scan(target_input, start_port, end_port):
             item["product"],
             item["version"]
         )
+
+        saved_ports.add(item["port"])
+
+    # Save open ports not returned by Nmap
+    for port in open_ports:
+
+        if port not in saved_ports:
+
+            try:
+                service = socket.getservbyport(port)
+            except:
+                service = "Unknown"
+
+            save_port(
+                scan_id,
+                port,
+                service,
+                "Unknown",
+                "Unknown"
+            )
 
     # Save vulnerabilities
 
