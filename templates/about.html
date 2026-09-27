@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>About | SecureScan</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet"
+            href="{{ url_for('static', filename='about.css') }}">
+
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            <span class="logo-dot"></span>
+            SecureScan
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/#features">
+                Features
+            </a>
+
+            <a href="/#how-it-works">
+                How It Works
+            </a>
+
+            <a href="/about" class="active">
+                About
+            </a>
+
+        </div>
+
+        <a href="/scan"
+           class="nav-button">
+            Start Scan
+        </a>
+
+    </nav>
+
+
+    <!-- =========================
+         ABOUT / PROJECT PAGE
+    ========================== -->
+
+    <main class="about-page">
+
+
+        <!-- HERO -->
+
+        <section class="about-hero">
+
+            <span class="section-badge">
+                ABOUT SECURESCAN
+            </span>
+
+            <h1>
+                Intelligent Network
+                <span>Security Assessment</span>
+            </h1>
+
+            <p>
+                Understanding the problem, need, working,
+                technologies and security assessment process
+                behind the SecureScan project.
+            </p>
+
+        </section>
+
+
+        <!-- 01 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>01</span>
+
+                <h2>
+                    What is SecureScan?
+                </h2>
+
+            </div>
+
+            <p>
+                SecureScan is a Computer Science project developed
+                as a web-based network security assessment system.
+                It combines port scanning, service detection,
+                vulnerability analysis and risk assessment into
+                a single platform.
+            </p>
+
+            <p>
+                The system allows an authorized user to enter an
+                IP address or domain and select a port range for
+                assessment. The system then processes the target
+                and presents the security findings through a
+                web dashboard.
+            </p>
+
+        </section>
+
+
+        <!-- 02 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>02</span>
+
+                <h2>
+                    Why was this project needed?
+                </h2>
+
+            </div>
+
+            <p>
+                A networked system can expose multiple services
+                through open ports. Knowing that a port is open
+                is useful, but it does not by itself explain
+                what software is running or whether that software
+                has known vulnerabilities.
+            </p>
+
+            <p>
+                Because of this, a security assessment needs
+                multiple stages. SecureScan connects these stages
+                so that port discovery can be followed by service
+                identification, vulnerability analysis and
+                risk assessment.
+            </p>
+
+        </section>
+
+
+        <!-- 03 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>03</span>
+
+                <h2>
+                    Problem Statement
+                </h2>
+
+            </div>
+
+            <p>
+                Traditional basic port scanning provides information
+                about accessible ports, but the findings can require
+                additional tools and analysis to understand the
+                associated services and known software vulnerabilities.
+            </p>
+
+            <p>
+                The project addresses this by creating one integrated
+                workflow that moves from network visibility toward
+                vulnerability information and an overall security
+                assessment.
+            </p>
+
+        </section>
+
+
+        <!-- 04 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>04</span>
+
+                <h2>
+                    Project Objectives
+                </h2>
+
+            </div>
+
+            <div class="about-points">
+
+                <div>
+                    <strong>
+                        Port Scanning
+                    </strong>
+
+                    <p>
+                        Discover open ports within the selected
+                        port range of an authorized target.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>
+                        Service Detection
+                    </strong>
+
+                    <p>
+                        Identify services and available product
+                        and version information.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>
+                        Vulnerability Analysis
+                    </strong>
+
+                    <p>
+                        Search known CVE records using detected
+                        software information.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>
+                        Risk Assessment
+                    </strong>
+
+                    <p>
+                        Analyse CVSS scores and severity information
+                        to determine the overall assessment.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>
+                        Result Presentation
+                    </strong>
+
+                    <p>
+                        Present findings, risk information and
+                        recommendations through a web dashboard.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>
+                        Data Storage
+                    </strong>
+
+                    <p>
+                        Store scan, port and vulnerability information
+                        for later viewing and analysis.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 05 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>05</span>
+
+                <h2>
+                    How Does the System Work?
+                </h2>
+
+            </div>
+
+            <p>
+                SecureScan follows a step-by-step security assessment
+                workflow. Each stage produces information that is
+                used by the next stage.
+            </p>
+
+            <div class="system-workflow">
+
+                <div class="workflow-item">
+                    <span>01</span>
+                    <strong>Target Input</strong>
+                    <p>
+                        User enters an authorized IP address
+                        or domain and a port range.
+                    </p>
+                </div>
+
+                <div class="workflow-arrow">
+                    ↓
+                </div>
+
+                <div class="workflow-item">
+                    <span>02</span>
+                    <strong>Port Scanning</strong>
+                    <p>
+                        Python scans the selected ports and
+                        identifies accessible ports.
+                    </p>
+                </div>
+
+                <div class="workflow-arrow">
+                    ↓
+                </div>
+
+                <div class="workflow-item">
+                    <span>03</span>
+                    <strong>Service Detection</strong>
+                    <p>
+                        Nmap performs service and version detection
+                        on discovered ports.
+                    </p>
+                </div>
+
+                <div class="workflow-arrow">
+                    ↓
+                </div>
+
+                <div class="workflow-item">
+                    <span>04</span>
+                    <strong>CVE Analysis</strong>
+                    <p>
+                        Detected software information is used
+                        to search the NVD vulnerability database.
+                    </p>
+                </div>
+
+                <div class="workflow-arrow">
+                    ↓
+                </div>
+
+                <div class="workflow-item">
+                    <span>05</span>
+                    <strong>Risk Assessment</strong>
+                    <p>
+                        CVSS scores and severity information
+                        are analysed to determine risk.
+                    </p>
+                </div>
+
+                <div class="workflow-arrow">
+                    ↓
+                </div>
+
+                <div class="workflow-item">
+                    <span>06</span>
+                    <strong>Database</strong>
+                    <p>
+                        Scan findings are stored in the
+                        SQLite database.
+                    </p>
+                </div>
+
+                <div class="workflow-arrow">
+                    ↓
+                </div>
+
+                <div class="workflow-item">
+                    <span>07</span>
+                    <strong>Security Report</strong>
+                    <p>
+                        The final findings are displayed
+                        through the results dashboard.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 06 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>06</span>
+
+                <h2>
+                    Technologies Used
+                </h2>
+
+            </div>
+
+            <div class="technology-list">
+
+                <div>
+                    <strong>Python</strong>
+
+                    <span>
+                        Port scanning and security processing
+                    </span>
+                </div>
+
+                <div>
+                    <strong>Flask</strong>
+
+                    <span>
+                        Web application and API handling
+                    </span>
+                </div>
+
+                <div>
+                    <strong>Nmap</strong>
+
+                    <span>
+                        Service and version detection
+                    </span>
+                </div>
+
+                <div>
+                    <strong>NVD API</strong>
+
+                    <span>
+                        Known CVE vulnerability information
+                    </span>
+                </div>
+
+                <div>
+                    <strong>SQLite</strong>
+
+                    <span>
+                        Scan and vulnerability data storage
+                    </span>
+                </div>
+
+                <div>
+                    <strong>HTML / CSS / JavaScript</strong>
+
+                    <span>
+                        User interface and scan dashboard
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 07 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>07</span>
+
+                <h2>
+                    Main Modules
+                </h2>
+
+            </div>
+
+            <div class="module-list">
+
+                <div>
+                    <strong>
+                        01 — Port Scanner
+                    </strong>
+
+                    <p>
+                        Uses Python socket-based scanning to check
+                        the selected port range.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>
+                        02 — Service Detection
+                    </strong>
+
+                    <p>
+                        Uses Nmap service and version detection
+                        to identify software information.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>
+                        03 — CVE Analysis
+                    </strong>
+
+                    <p>
+                        Searches the NVD API for known vulnerabilities
+                        related to detected software.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>
+                        04 — Risk Assessment
+                    </strong>
+
+                    <p>
+                        Analyses CVSS scores and severity to generate
+                        an overall risk classification.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>
+                        05 — Database
+                    </strong>
+
+                    <p>
+                        Stores scans, ports and vulnerability
+                        findings using SQLite.
+                    </p>
+                </div>
+
+                <div>
+                    <strong>
+                        06 — Web Dashboard
+                    </strong>
+
+                    <p>
+                        Provides scan progress, results and
+                        security recommendations.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 08 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>08</span>
+
+                <h2>
+                    Database Structure
+                </h2>
+
+            </div>
+
+            <p>
+                SecureScan uses three main database tables
+                to organize scan information.
+            </p>
+
+            <div class="database-list">
+
+                <div>
+
+                    <strong>
+                        scans
+                    </strong>
+
+                    <p>
+                        Stores the target, scan date,
+                        number of open ports, CVE count,
+                        highest CVSS and overall risk.
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        ports
+                    </strong>
+
+                    <p>
+                        Stores port number, service,
+                        product and version information.
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        vulnerabilities
+                    </strong>
+
+                    <p>
+                        Stores port number, CVE ID, CVSS score,
+                        severity and vulnerability description.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 09 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>09</span>
+
+                <h2>
+                    Risk Assessment
+                </h2>
+
+            </div>
+
+            <p>
+                The system uses the highest available CVSS score
+                among the detected vulnerabilities to determine
+                the overall risk category.
+            </p>
+
+            <div class="risk-table">
+
+                <div>
+                    <span>9.0 – 10.0</span>
+                    <strong>CRITICAL</strong>
+                </div>
+
+                <div>
+                    <span>7.0 – 8.9</span>
+                    <strong>HIGH</strong>
+                </div>
+
+                <div>
+                    <span>4.0 – 6.9</span>
+                    <strong>MEDIUM</strong>
+                </div>
+
+                <div>
+                    <span>Above 0 – 3.9</span>
+                    <strong>LOW</strong>
+                </div>
+
+            </div>
+
+            <p>
+                When the system cannot perform a meaningful
+                vulnerability assessment because the required
+                product or version information is unavailable,
+                it can report the result as
+                <strong>NOT ASSESSED</strong>.
+            </p>
+
+        </section>
+
+
+        <!-- 10 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>10</span>
+
+                <h2>
+                    What Does the User Get?
+                </h2>
+
+            </div>
+
+            <p>
+                After the scan is completed, the results page
+                combines the major findings into a single
+                security assessment.
+            </p>
+
+            <div class="output-list">
+
+                <div>
+                    <strong>
+                        Scanned Target
+                    </strong>
+
+                    <span>
+                        IP address or domain assessed
+                    </span>
+                </div>
+
+                <div>
+                    <strong>
+                        Open Ports
+                    </strong>
+
+                    <span>
+                        Accessible ports and detected services
+                    </span>
+                </div>
+
+                <div>
+                    <strong>
+                        Vulnerability Findings
+                    </strong>
+
+                    <span>
+                        CVE IDs, CVSS scores and severity
+                    </span>
+                </div>
+
+                <div>
+                    <strong>
+                        Highest CVSS
+                    </strong>
+
+                    <span>
+                        Highest detected vulnerability score
+                    </span>
+                </div>
+
+                <div>
+                    <strong>
+                        Overall Risk
+                    </strong>
+
+                    <span>
+                        Final assessment classification
+                    </span>
+                </div>
+
+                <div>
+                    <strong>
+                        Security Recommendations
+                    </strong>
+
+                    <span>
+                        Suggested actions based on findings
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 11 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>11</span>
+
+                <h2>
+                    How Can It Help?
+                </h2>
+
+            </div>
+
+            <p>
+                SecureScan provides a structured way to understand
+                the security information collected from an authorized
+                network target.
+            </p>
+
+            <p>
+                Instead of displaying only open ports, the system
+                connects network visibility with service information,
+                known vulnerability records and risk information.
+            </p>
+
+            <p>
+                This makes the project useful as an educational
+                demonstration of how different cybersecurity concepts
+                can be combined into one practical application.
+            </p>
+
+        </section>
+
+
+        <!-- 12 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>12</span>
+
+                <h2>
+                    Limitations
+                </h2>
+
+            </div>
+
+            <div class="simple-list">
+
+                <p>
+                    The system is intended for authorized
+                    security assessment and educational use.
+                </p>
+
+                <p>
+                    CVE matching depends on the accuracy of the
+                    detected product and version information.
+                </p>
+
+                <p>
+                    Unknown product or version information can
+                    prevent reliable vulnerability matching.
+                </p>
+
+                <p>
+                    Vulnerability results depend on the information
+                    available from the vulnerability database.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- 13 -->
+
+        <section class="about-page-section">
+
+            <div class="about-page-heading">
+
+                <span>13</span>
+
+                <h2>
+                    Future Scope
+                </h2>
+
+            </div>
+
+            <div class="simple-list">
+
+                <p>
+                    Improve service and version identification
+                    for more accurate vulnerability matching.
+                </p>
+
+                <p>
+                    Add more detailed remediation guidance for
+                    individual vulnerabilities.
+                </p>
+
+                <p>
+                    Add downloadable security reports.
+                </p>
+
+                <p>
+                    Add historical scan comparison and
+                    monitoring features.
+                </p>
+
+                <p>
+                    Improve alerting and automated security
+                    monitoring capabilities.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FINAL SUMMARY -->
+
+        <section class="about-summary">
+
+            <span class="section-badge">
+                PROJECT SUMMARY
+            </span>
+
+            <h2>
+                From Network Visibility
+                <span>to Risk Assessment</span>
+            </h2>
+
+            <p>
+                SecureScan demonstrates how port scanning,
+                service detection, vulnerability analysis,
+                risk assessment, database management and
+                web development can work together in a
+                single cybersecurity application.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- EXISTING FOOTER -->
+
+    <footer class="site-footer">
+
+        <div class="footer-bottom">
+
+            <div class="footer-brand">
+                SecureScan
+            </div>
+
+            <div class="footer-copy">
+                © 2026 SecureScan
+            </div>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>
